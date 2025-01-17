@@ -91,7 +91,7 @@ def process_json_to_graph(user_info: str, json_data: str, chunk_size: int = 2000
             graph_doc = llm_transformer.convert_to_graph_documents([doc])[0]
             all_nodes.extend(graph_doc.nodes)
             all_relationships.extend(graph_doc.relationships)
-            deduplicate(all_nodes, all_relationships)
+            return deduplicate(all_nodes, all_relationships)
         except Exception as e:
             print(f"Error processing chunk {i+1}: {str(e)}")
             continue
