@@ -1,0 +1,94 @@
+{
+    "id": "1234567890",
+    "name": "John Doe",
+    "username": "johndoe",
+    "description": "Tech enthusiast | Developer | Coffee lover | Tweets are my own",
+    "location": "San Francisco, CA",
+    "url": "https://johndoe.com",
+    "profile_image_url": "https://pbs.twimg.com/profile_images/1234567890/johndoe.jpg",
+    "verified": false,
+    "protected": false,
+    "followers_count": 3500,
+    "following_count": 400,
+    "tweet_count": 15000,
+    "listed_count": 25,
+    "created_at": "2010-01-01T12:00:00Z",
+    "tweets": [
+      {
+        "id": "987654321",
+        "text": "Just finished building my new web app! #Tech #WebDevelopment",
+        "created_at": "2025-01-15T08:00:00Z",
+        "likes": 150,
+        "retweets": 50,
+        "replies": 10,
+        "media": [
+          {
+            "url": "https://pbs.twimg.com/media/example-image.jpg",
+            "type": "image"
+          }
+        ]
+      },
+      {
+        "id": "987654322",
+        "text": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife",
+        "created_at": "2025-01-14T16:30:00Z",
+        "likes": 200,
+        "retweets": 75,
+        "replies": 20
+      }
+    ],
+    "followers": [
+      {
+        "id": "2345678901",
+        "name": "Jane Smith",
+        "username": "janesmith",
+        "followers_count": 500,
+        "following_count": 300,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/2345678901/janesmith.jpg"
+      },
+      {
+        "id": "2345678902",
+        "name": "Alice Cooper",
+        "username": "alicecooper",
+        "followers_count": 1200,
+        "following_count": 800,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/2345678902/alicecooper.jpg"
+      }
+    ],
+    "following": [
+      {
+        "id": "3456789012",
+        "name": "Bob Marley",
+        "username": "bobmarley",
+        "followers_count": 5000,
+        "following_count": 3500,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/3456789012/bobmarley.jpg"
+      },
+      {
+        "id": "3456789013",
+        "name": "Charlie Chaplin",
+        "username": "charliechaplin",
+        "followers_count": 4000,
+        "following_count": 3000,
+        "profile_image_url": "https://pbs.twimg.com/profile_images/3456789013/charliechaplin.jpg"
+      }
+    ],
+    "liked_tweets": [
+      {
+        "id": "987654323",
+        "text": "Learning how to build scalable systems with microservices! #TechTalk",
+        "created_at": "2025-01-13T14:00:00Z",
+        "likes": 100,
+        "retweets": 30
+      },
+      {
+        "id": "987654324",
+        "text": "The latest trends in AI and machine learning are mind-blowing! #AI #MachineLearning",
+        "created_at": "2025-01-12T09:30:00Z",
+        "likes": 220,
+        "retweets": 80
+      }
+    ],
+    "profile_banner_url": "https://pbs.twimg.com/profile_banners/1234567890/1619472000"
+  }
+  

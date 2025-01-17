@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "#000000"}, "id": "1234567890", "label": "1234567890", "shape": "dot", "title": "1234567890"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Tech enthusiast | Developer | Coffee lover | Tweets are my own", "label": "Tech enthusiast | Developer | Coffee lover | Tweets are my own", "shape": "dot", "title": "Tech enthusiast | Developer | Coffee lover | Tweets are my own"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "https://johndoe.com", "label": "https://johndoe.com", "shape": "dot", "title": "https://johndoe.com"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "label": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "shape": "dot", "title": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "25", "label": "25", "shape": "dot", "title": "25"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "50", "label": "50", "shape": "dot", "title": "50"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2345678901", "label": "2345678901", "shape": "dot", "title": "2345678901"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "10", "label": "10", "shape": "dot", "title": "10"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "janesmith", "label": "janesmith", "shape": "dot", "title": "janesmith"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Just finished building my new web app! #Tech #WebDevelopment", "label": "Just finished building my new web app! #Tech #WebDevelopment", "shape": "dot", "title": "Just finished building my new web app! #Tech #WebDevelopment"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "987654322", "label": "987654322", "shape": "dot", "title": "987654322"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "John Doe", "label": "John Doe", "shape": "dot", "title": "John Doe"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "johndoe", "label": "johndoe", "shape": "dot", "title": "johndoe"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "75", "label": "75", "shape": "dot", "title": "75"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "200", "label": "200", "shape": "dot", "title": "200"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "3500", "label": "3500", "shape": "dot", "title": "3500"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "San Francisco, CA", "label": "San Francisco, CA", "shape": "dot", "title": "San Francisco, CA"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "20", "label": "20", "shape": "dot", "title": "20"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2", "label": "2", "shape": "dot", "title": "2"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "150", "label": "150", "shape": "dot", "title": "150"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "False", "label": "False", "shape": "dot", "title": "False"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "https://pbs.twimg.com/profile_images/1234567890/johndoe.jpg", "label": "https://pbs.twimg.com/profile_images/1234567890/johndoe.jpg", "shape": "dot", "title": "https://pbs.twimg.com/profile_images/1234567890/johndoe.jpg"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "400", "label": "400", "shape": "dot", "title": "400"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2010-01-01T12:00:00Z", "label": "2010-01-01T12:00:00Z", "shape": "dot", "title": "2010-01-01T12:00:00Z"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2025-01-15T08:00:00Z", "label": "2025-01-15T08:00:00Z", "shape": "dot", "title": "2025-01-15T08:00:00Z"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "https://pbs.twimg.com/media/example-image.jpg", "label": "https://pbs.twimg.com/media/example-image.jpg", "shape": "dot", "title": "https://pbs.twimg.com/media/example-image.jpg"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "987654321", "label": "987654321", "shape": "dot", "title": "987654321"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2025-01-14T16:30:00Z", "label": "2025-01-14T16:30:00Z", "shape": "dot", "title": "2025-01-14T16:30:00Z"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Jane Smith", "label": "Jane Smith", "shape": "dot", "title": "Jane Smith"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Alice Cooper", "label": "Alice Cooper", "shape": "dot", "title": "Alice Cooper"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "100", "label": "100", "shape": "dot", "title": "100"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "3000", "label": "3000", "shape": "dot", "title": "3000"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "300", "label": "300", "shape": "dot", "title": "300"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "1200", "label": "1200", "shape": "dot", "title": "1200"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Charlie Chaplin", "label": "Charlie Chaplin", "shape": "dot", "title": "Charlie Chaplin"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Learning how to build scalable systems with microservices! #TechTalk", "label": "Learning how to build scalable systems with microservices! #TechTalk", "shape": "dot", "title": "Learning how to build scalable systems with microservices! #TechTalk"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "500", "label": "500", "shape": "dot", "title": "500"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "800", "label": "800", "shape": "dot", "title": "800"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "30", "label": "30", "shape": "dot", "title": "30"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "5000", "label": "5000", "shape": "dot", "title": "5000"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "Bob Marley", "label": "Bob Marley", "shape": "dot", "title": "Bob Marley"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "4000", "label": "4000", "shape": "dot", "title": "4000"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "item 1", "label": "item 1", "shape": "dot", "title": "item 1"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2025-01-12T09:30:00Z", "label": "2025-01-12T09:30:00Z", "shape": "dot", "title": "2025-01-12T09:30:00Z"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "80", "label": "80", "shape": "dot", "title": "80"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "item 2", "label": "item 2", "shape": "dot", "title": "item 2"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "220", "label": "220", "shape": "dot", "title": "220"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "https://pbs.twimg.com/profile_banners/1234567890/1619472000", "label": "https://pbs.twimg.com/profile_banners/1234567890/1619472000", "shape": "dot", "title": "https://pbs.twimg.com/profile_banners/1234567890/1619472000"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "987654324", "label": "987654324", "shape": "dot", "title": "987654324"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "2025-01-13T14:00:00Z", "label": "2025-01-13T14:00:00Z", "shape": "dot", "title": "2025-01-13T14:00:00Z"}, {"color": "#97c2fc", "font": {"color": "#000000"}, "id": "The latest trends in AI and machine learning are mind-blowing! #AI #MachineLearning", "label": "The latest trends in AI and machine learning are mind-blowing! #AI #MachineLearning", "shape": "dot", "title": "The latest trends in AI and machine learning are mind-blowing! #AI #MachineLearning"}]);
+                  edges = new vis.DataSet([{"from": "John Doe", "label": "HAS_ID", "title": "John Doe -\u003e HAS_ID -\u003e 1234567890", "to": "1234567890"}, {"from": "John Doe", "label": "HAS_USERNAME", "title": "John Doe -\u003e HAS_USERNAME -\u003e johndoe", "to": "johndoe"}, {"from": "John Doe", "label": "HAS_DESCRIPTION", "title": "John Doe -\u003e HAS_DESCRIPTION -\u003e Tech enthusiast | Developer | Coffee lover | Tweets are my own", "to": "Tech enthusiast | Developer | Coffee lover | Tweets are my own"}, {"from": "John Doe", "label": "LOCATED_IN", "title": "John Doe -\u003e LOCATED_IN -\u003e San Francisco, CA", "to": "San Francisco, CA"}, {"from": "John Doe", "label": "HAS_URL", "title": "John Doe -\u003e HAS_URL -\u003e https://johndoe.com", "to": "https://johndoe.com"}, {"from": "John Doe", "label": "HAS_PROFILE_IMAGE", "title": "John Doe -\u003e HAS_PROFILE_IMAGE -\u003e https://pbs.twimg.com/profile_images/1234567890/johndoe.jpg", "to": "https://pbs.twimg.com/profile_images/1234567890/johndoe.jpg"}, {"from": "John Doe", "label": "VERIFIED_STATUS", "title": "John Doe -\u003e VERIFIED_STATUS -\u003e False", "to": "False"}, {"from": "John Doe", "label": "HAS_FOLLOWERS_COUNT", "title": "John Doe -\u003e HAS_FOLLOWERS_COUNT -\u003e 3500", "to": "3500"}, {"from": "John Doe", "label": "HAS_FOLLOWING_COUNT", "title": "John Doe -\u003e HAS_FOLLOWING_COUNT -\u003e 400", "to": "400"}, {"from": "John Doe", "label": "HAS_TWEETS_COUNT", "title": "John Doe -\u003e HAS_TWEETS_COUNT -\u003e 2", "to": "2"}, {"from": "John Doe", "label": "LISTED_IN", "title": "John Doe -\u003e LISTED_IN -\u003e 25", "to": "25"}, {"from": "John Doe", "label": "CREATED_AT", "title": "John Doe -\u003e CREATED_AT -\u003e 2010-01-01T12:00:00Z", "to": "2010-01-01T12:00:00Z"}, {"from": "John Doe", "label": "POSTED_TWEET", "title": "John Doe -\u003e POSTED_TWEET -\u003e Just finished building my new web app! #Tech #WebDevelopment", "to": "Just finished building my new web app! #Tech #WebDevelopment"}, {"from": "John Doe", "label": "POSTED_TWEET", "title": "John Doe -\u003e POSTED_TWEET -\u003e Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "to": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife"}, {"from": "Just finished building my new web app! #Tech #WebDevelopment", "label": "HAS_ID", "title": "Just finished building my new web app! #Tech #WebDevelopment -\u003e HAS_ID -\u003e 987654321", "to": "987654321"}, {"from": "Just finished building my new web app! #Tech #WebDevelopment", "label": "CREATED_AT", "title": "Just finished building my new web app! #Tech #WebDevelopment -\u003e CREATED_AT -\u003e 2025-01-15T08:00:00Z", "to": "2025-01-15T08:00:00Z"}, {"from": "Just finished building my new web app! #Tech #WebDevelopment", "label": "HAS_LIKES", "title": "Just finished building my new web app! #Tech #WebDevelopment -\u003e HAS_LIKES -\u003e 150", "to": "150"}, {"from": "Just finished building my new web app! #Tech #WebDevelopment", "label": "HAS_RETWEETS", "title": "Just finished building my new web app! #Tech #WebDevelopment -\u003e HAS_RETWEETS -\u003e 50", "to": "50"}, {"from": "Just finished building my new web app! #Tech #WebDevelopment", "label": "HAS_REPLIES", "title": "Just finished building my new web app! #Tech #WebDevelopment -\u003e HAS_REPLIES -\u003e 10", "to": "10"}, {"from": "Just finished building my new web app! #Tech #WebDevelopment", "label": "CONTAINS_MEDIA", "title": "Just finished building my new web app! #Tech #WebDevelopment -\u003e CONTAINS_MEDIA -\u003e https://pbs.twimg.com/media/example-image.jpg", "to": "https://pbs.twimg.com/media/example-image.jpg"}, {"from": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "label": "HAS_ID", "title": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife -\u003e HAS_ID -\u003e 987654322", "to": "987654322"}, {"from": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "label": "CREATED_AT", "title": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife -\u003e CREATED_AT -\u003e 2025-01-14T16:30:00Z", "to": "2025-01-14T16:30:00Z"}, {"from": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "label": "HAS_LIKES", "title": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife -\u003e HAS_LIKES -\u003e 200", "to": "200"}, {"from": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "label": "HAS_RETWEETS", "title": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife -\u003e HAS_RETWEETS -\u003e 75", "to": "75"}, {"from": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife", "label": "HAS_REPLIES", "title": "Excited to join the new hackathon this weekend! #Hackathon #DeveloperLife -\u003e HAS_REPLIES -\u003e 20", "to": "20"}, {"from": "John Doe", "label": "FOLLOWS", "title": "John Doe -\u003e FOLLOWS -\u003e Jane Smith", "to": "Jane Smith"}, {"from": "Jane Smith", "label": "HAS_ID", "title": "Jane Smith -\u003e HAS_ID -\u003e 2345678901", "to": "2345678901"}, {"from": "Jane Smith", "label": "HAS_USERNAME", "title": "Jane Smith -\u003e HAS_USERNAME -\u003e janesmith", "to": "janesmith"}, {"from": "johndoe", "label": "FOLLOWS", "title": "johndoe -\u003e FOLLOWS -\u003e janesmith", "to": "janesmith"}, {"from": "johndoe", "label": "FOLLOWS", "title": "johndoe -\u003e FOLLOWS -\u003e Alice Cooper", "to": "Alice Cooper"}, {"from": "janesmith", "label": "HAS_FOLLOWERS_COUNT", "title": "janesmith -\u003e HAS_FOLLOWERS_COUNT -\u003e 500", "to": "500"}, {"from": "janesmith", "label": "HAS_FOLLOWING_COUNT", "title": "janesmith -\u003e HAS_FOLLOWING_COUNT -\u003e 300", "to": "300"}, {"from": "Alice Cooper", "label": "HAS_FOLLOWERS_COUNT", "title": "Alice Cooper -\u003e HAS_FOLLOWERS_COUNT -\u003e 1200", "to": "1200"}, {"from": "Alice Cooper", "label": "HAS_FOLLOWING_COUNT", "title": "Alice Cooper -\u003e HAS_FOLLOWING_COUNT -\u003e 800", "to": "800"}, {"from": "johndoe", "label": "FOLLOWS", "title": "johndoe -\u003e FOLLOWS -\u003e Bob Marley", "to": "Bob Marley"}, {"from": "johndoe", "label": "FOLLOWS", "title": "johndoe -\u003e FOLLOWS -\u003e Charlie Chaplin", "to": "Charlie Chaplin"}, {"from": "Bob Marley", "label": "HAS_FOLLOWERS_COUNT", "title": "Bob Marley -\u003e HAS_FOLLOWERS_COUNT -\u003e 5000", "to": "5000"}, {"from": "Bob Marley", "label": "HAS_FOLLOWING_COUNT", "title": "Bob Marley -\u003e HAS_FOLLOWING_COUNT -\u003e 3500", "to": "3500"}, {"from": "Charlie Chaplin", "label": "HAS_FOLLOWERS_COUNT", "title": "Charlie Chaplin -\u003e HAS_FOLLOWERS_COUNT -\u003e 4000", "to": "4000"}, {"from": "Charlie Chaplin", "label": "HAS_FOLLOWING_COUNT", "title": "Charlie Chaplin -\u003e HAS_FOLLOWING_COUNT -\u003e 3000", "to": "3000"}, {"from": "johndoe", "label": "LIKES", "title": "johndoe -\u003e LIKES -\u003e Learning how to build scalable systems with microservices! #TechTalk", "to": "Learning how to build scalable systems with microservices! #TechTalk"}, {"from": "Learning how to build scalable systems with microservices! #TechTalk", "label": "HAS_LIKES", "title": "Learning how to build scalable systems with microservices! #TechTalk -\u003e HAS_LIKES -\u003e 100", "to": "100"}, {"from": "Learning how to build scalable systems with microservices! #TechTalk", "label": "HAS_RETWEETS", "title": "Learning how to build scalable systems with microservices! #TechTalk -\u003e HAS_RETWEETS -\u003e 30", "to": "30"}, {"from": "johndoe", "label": "LIKES_TWEET", "title": "johndoe -\u003e LIKES_TWEET -\u003e item 1", "to": "item 1"}, {"from": "item 1", "label": "HAS_CREATED_AT", "title": "item 1 -\u003e HAS_CREATED_AT -\u003e 2025-01-13T14:00:00Z", "to": "2025-01-13T14:00:00Z"}, {"from": "item 1", "label": "HAS_LIKES", "title": "item 1 -\u003e HAS_LIKES -\u003e 100", "to": "100"}, {"from": "item 1", "label": "HAS_RETWEETS", "title": "item 1 -\u003e HAS_RETWEETS -\u003e 30", "to": "30"}, {"from": "johndoe", "label": "LIKES_TWEET", "title": "johndoe -\u003e LIKES_TWEET -\u003e item 2", "to": "item 2"}, {"from": "item 2", "label": "HAS_ID", "title": "item 2 -\u003e HAS_ID -\u003e 987654324", "to": "987654324"}, {"from": "item 2", "label": "HAS_TEXT", "title": "item 2 -\u003e HAS_TEXT -\u003e The latest trends in AI and machine learning are mind-blowing! #AI #MachineLearning", "to": "The latest trends in AI and machine learning are mind-blowing! #AI #MachineLearning"}, {"from": "item 2", "label": "HAS_CREATED_AT", "title": "item 2 -\u003e HAS_CREATED_AT -\u003e 2025-01-12T09:30:00Z", "to": "2025-01-12T09:30:00Z"}, {"from": "item 2", "label": "HAS_LIKES", "title": "item 2 -\u003e HAS_LIKES -\u003e 220", "to": "220"}, {"from": "item 2", "label": "HAS_RETWEETS", "title": "item 2 -\u003e HAS_RETWEETS -\u003e 80", "to": "80"}, {"from": "johndoe", "label": "HAS_PROFILE_BANNER_URL", "title": "johndoe -\u003e HAS_PROFILE_BANNER_URL -\u003e https://pbs.twimg.com/profile_banners/1234567890/1619472000", "to": "https://pbs.twimg.com/profile_banners/1234567890/1619472000"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"physics": {"forceAtlas2Based": {"gravitationalConstant": -50, "springLength": 250, "springConstant": 0.5}, "maxVelocity": 50, "solver": "forceAtlas2Based", "timestep": 0.35}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
